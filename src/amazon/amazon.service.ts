@@ -35,7 +35,7 @@ export class AmazonService extends BaseService<Product> {
     const urlObj = new URL(categoryUrl);
     const urlOrigin = urlObj.origin;
     try {
-      console.log('============ started parsing ==================');
+      console.info('============ started parsing ==================');
       await page.goto(categoryUrl);
       await page.waitForLoadState();
       let hasMorePaginationItems = true;
@@ -58,19 +58,19 @@ export class AmazonService extends BaseService<Product> {
           'span.s-pagination-item.s-pagination-selected',
         );
 
-        console.log('current page', await currentPage.innerText());
+        console.info('current page', await currentPage.innerText());
 
         if (nextPageLink) {
           await nextPageLink.click({ timeout: 10000 });
           await page.waitForTimeout(3000);
         } else {
-          console.log('No pagination link');
+          console.info('No pagination link');
           hasMorePaginationItems = false;
           break;
         }
       }
 
-      console.log('============ completed parsing ================');
+      console.info('============ completed parsing ================');
     } catch (error) {
       console.error(error);
     } finally {
@@ -84,7 +84,7 @@ export class AmazonService extends BaseService<Product> {
 
     const productDtos: CreateProductDto[] = [];
 
-    console.log(`Number of elements found: ${products.length}`);
+    console.info(`Number of elements found: ${products.length}`);
     for (const element of products) {
       const asin = await extractAsin(element);
       const title = await extractTitle(element);
@@ -114,7 +114,7 @@ export class AmazonService extends BaseService<Product> {
   }
 
   async getProducts(listParamsDto: ListParamsDto) {
-    return await this.list(listParamsDto);
+    return await this.list(listParamsDto)
   }
 
   async createOrUpdateProduct(productData: CreateProductDto) {
