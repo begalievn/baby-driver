@@ -114,7 +114,7 @@ export class AmazonService extends BaseService<Product> {
   }
 
   async getProducts(listParamsDto: ListParamsDto) {
-    return await this.list(listParamsDto)
+    return await this.list(listParamsDto);
   }
 
   async createOrUpdateProduct(productData: CreateProductDto) {
