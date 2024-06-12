@@ -1,11 +1,11 @@
 version: "3.4"
 
 services:
-  amazon-parser:
+  quanticapps-parser:
     build:
       context: .
     restart: always
-    container_name: amazon-parser
+    container_name: quanticapps-parser
     volumes:
       - ./uploads:/usr/src/app/uploads
     ports:
