@@ -1,0 +1,5 @@
+FROM alpine:3.4
+RUN apk add --no-cache libc6-compat
+FROM node:18.19
+RUN mkdir /.npm
+RUN chmod -R 777 /.npm

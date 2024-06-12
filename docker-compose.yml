@@ -1,0 +1,22 @@
+version: "3.4"
+
+services:
+  amazon-parser:
+    build:
+      context: .
+    restart: always
+    container_name: amazon-parser
+    volumes:
+      - ./uploads:/usr/src/app/uploads
+    ports:
+      - "127.0.0.1:${PORT}:${PORT}"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+networks:
+  default:
+    external:
+      name: db_localDB
